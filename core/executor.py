@@ -1,11 +1,15 @@
 """
 工作流执行器 - 在独立线程中执行工作流
 """
+import warnings
 import threading
 import time
 from typing import Callable, Optional
 import pyautogui
 import pyperclip
+
+# 忽略openpyxl的样式警告
+warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
 from .workflow import Workflow, ActionNode, ActionType
 
@@ -187,11 +191,15 @@ class Executor:
                 if node.excel_file not in excel_files:
                     excel_files[node.excel_file] = node.excel_col
 
-        # 读取每个Excel文件（只读第一个列）
+        if not excel_files:
+            return
+
+        # 读取第一个Excel文件
         for excel_file in excel_files:
             try:
                 from openpyxl import load_workbook
-                wb = load_workbook(excel_file, read_only=True, data_only=True)
+                # 不使用read_only模式，确保能读取所有数据
+                wb = load_workbook(excel_file, data_only=True)
                 ws = wb.active
                 for row in ws.iter_rows(values_only=True):
                     self._excel_data.append(list(row))

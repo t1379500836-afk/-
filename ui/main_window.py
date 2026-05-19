@@ -309,7 +309,7 @@ class MainWindow(QMainWindow):
 
         self.step_list = QListWidget()
         self.step_list.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
-        self.step_list.itemDoubleClicked.connect(self._edit_step)
+        self.step_list.itemClicked.connect(self._edit_step)
         list_layout.addWidget(self.step_list)
 
         # 列表操作按钮
