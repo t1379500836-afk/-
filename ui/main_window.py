@@ -33,7 +33,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("轻松两点 V1.0.0")
-        self.setMinimumSize(1000, 650)
+        self.setMinimumSize(600, 450)
+        self.resize(740, 550)
 
         # 初始化组件
         self.storage = Storage()
