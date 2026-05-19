@@ -13,7 +13,15 @@ class Storage:
 
     def __init__(self, storage_dir: str = None):
         if storage_dir is None:
-            storage_dir = os.path.join(os.path.expanduser("~"), ".autoworker")
+            # 优先使用exe同目录的config文件夹
+            import sys
+            if getattr(sys, 'frozen', False):
+                # 打包后的exe
+                base_dir = os.path.dirname(sys.executable)
+            else:
+                # 开发模式
+                base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            storage_dir = os.path.join(base_dir, "config")
         self.storage_dir = storage_dir
         self.workflows_file = os.path.join(storage_dir, "workflows.json")
         self.config_file = os.path.join(storage_dir, "config.json")
@@ -46,7 +54,12 @@ class Storage:
                 key=node_data.get("key", ""),
                 modifiers=node_data.get("modifiers", []),
                 delay_ms=node_data.get("delay_ms", 500),
-                enabled=node_data.get("enabled", True)
+                enabled=node_data.get("enabled", True),
+                text=node_data.get("text", ""),
+                text_lines=node_data.get("text_lines", []),
+                excel_file=node_data.get("excel_file", ""),
+                excel_col=node_data.get("excel_col", 1),
+                excel_start_row=node_data.get("excel_start_row", 2)
             )
             workflow.nodes.append(node)
 

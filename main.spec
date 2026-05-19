@@ -6,7 +6,11 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[
+        ('logo.png', '.'),  # 根目录
+        ('logo.png', '_internal'),  # _internal目录
+        ('icon.ico', '.'),  # exe图标
+    ],
     hiddenimports=['keyboard', 'pyautogui', 'pywin32'],
     hookspath=[],
     hooksconfig={},
@@ -25,7 +29,8 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='小陶自动化',
+    name='轻松两点',
+    icon='icon.ico',  # exe图标
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -46,5 +51,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='小陶自动化',
+    name='轻松两点',
 )

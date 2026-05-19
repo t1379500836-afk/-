@@ -275,8 +275,13 @@ class MainWindow(QMainWindow):
         author_label.setStyleSheet("color: gray; font-size: 10px;")
         layout.addWidget(author_label)
 
-        # 保存位置提示
-        save_path_label = QLabel("配置保存: C:\\Users\\用户名\\.autoworker\\")
+        # 保存位置提示（显示相对路径）
+        import sys
+        if getattr(sys, 'frozen', False):
+            save_path = "轻松两点/config"
+        else:
+            save_path = "config"
+        save_path_label = QLabel(f"配置保存: {save_path}")
         save_path_label.setStyleSheet("color: gray; font-size: 10px;")
         layout.addWidget(save_path_label)
 
