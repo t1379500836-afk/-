@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("小陶自动化 V1.0.0")
+        self.setWindowTitle("轻松两点 V1.0.0")
         self.setMinimumSize(1000, 650)
 
         # 初始化组件
@@ -260,6 +260,25 @@ class MainWindow(QMainWindow):
         self.status_label.setStyleSheet("color: gray; font-style: italic;")
         layout.addWidget(self.status_label)
 
+        # 热键提示
+        hotkey_group = QGroupBox("全局热键")
+        hotkey_layout = QVBoxLayout(hotkey_group)
+        hotkey_layout.addWidget(QLabel("F6 - 开始执行"))
+        hotkey_layout.addWidget(QLabel("F7 - 停止执行"))
+        hotkey_layout.addWidget(QLabel("F8 - 暂停/继续"))
+        hotkey_layout.addWidget(QLabel("F4 - 拾取坐标"))
+        layout.addWidget(hotkey_group)
+
+        # 作者信息
+        author_label = QLabel("作者邮箱: t1379500836@gmail.com")
+        author_label.setStyleSheet("color: gray; font-size: 10px;")
+        layout.addWidget(author_label)
+
+        # 保存位置提示
+        save_path_label = QLabel("配置保存: C:\\Users\\用户名\\.autoworker\\")
+        save_path_label.setStyleSheet("color: gray; font-size: 10px;")
+        layout.addWidget(save_path_label)
+
         layout.addStretch()
         return panel
 
@@ -380,15 +399,6 @@ class MainWindow(QMainWindow):
         control_layout.addWidget(self.progress_label)
 
         layout.addWidget(control_group)
-
-        # 热键提示
-        hotkey_group = QGroupBox("全局热键")
-        hotkey_layout = QVBoxLayout(hotkey_group)
-        hotkey_layout.addWidget(QLabel("F6 - 开始执行"))
-        hotkey_layout.addWidget(QLabel("F7 - 停止执行"))
-        hotkey_layout.addWidget(QLabel("F8 - 暂停/继续"))
-        hotkey_layout.addWidget(QLabel("F4 - 拾取坐标"))
-        layout.addWidget(hotkey_group)
 
         return panel
 

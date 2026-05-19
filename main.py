@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AutoWorker - 自动化操作工具
+轻松两点 - 自动化操作工具
 支持鼠标/键盘操作录制、回放、坐标拾取、全局热键控制
 
 Usage:
@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon, QPixmap
 
 from ui.main_window import MainWindow
 
@@ -24,9 +25,14 @@ def main():
     app.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
 
     # 设置应用信息
-    app.setApplicationName("AutoWorker")
+    app.setApplicationName("轻松两点")
     app.setApplicationVersion("1.0.0")
-    app.setOrganizationName("AutoWorker")
+    app.setOrganizationName("轻松两点")
+
+    # 设置应用图标
+    logo_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logo.png")
+    if os.path.exists(logo_path):
+        app.setWindowIcon(QIcon(QPixmap(logo_path)))
 
     window = MainWindow()
     window.show()
